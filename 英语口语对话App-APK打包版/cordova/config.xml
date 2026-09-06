@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+  Cordova 工程配置。
+  本目录连同上级的 index.html / css / js / assets 即为 Cordova 的 www 内容。
+  打包步骤见同目录 build-apk.md。
+-->
+<widget id="com.estalk.scenarios" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>英语口语情景对话</name>
+    <description>离线可用的少儿英语口语情景对话练习 App</description>
+    <author email="app@example.com" href="https://example.com">WorkBuddy</author>
+    <content src="index.html" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <!-- 云端大模型生成需要访问外网 API：放开全部网络源（如需更严格，可改为仅放行你的服务商域名） -->
+    <access origin="*" />
+
+    <!-- 麦克风（语音输入 STT）所需权限：Android 在 Manifest 声明，运行时弹窗由
+         cordova-plugin-android-permissions 在 JS 层触发（见 js/mic-permission.js）。 -->
+    <plugin name="cordova-plugin-android-permissions" spec="^1.1.5" />
+
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="android-minSdkVersion" value="24" />
+    <preference name="android-targetSdkVersion" value="34" />
+    <preference name="BackgroundColor" value="0xf4f6fb" />
+    <preference name="StatusBarBackgroundColor" value="#2563eb" />
+    <preference name="StatusBarStyle" value="lightcontent" />
+    <!-- 注意：Cordova Android 推荐使用 PNG 图标。请用 assets/icon.svg 导出 512x512 与 192x192 的 PNG 放入 res/ 并引用 -->
+    <platform name="android">
+        <preference name="AndroidLaunchMode" value="singleTask" />
+        <icon src="assets/icon.svg" />
+        <!-- 录音 / 语音识别权限（运行时由插件申请） -->
+        <uses-permission android:name="android.permission.RECORD_AUDIO" />
+        <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    </platform>
+    <platform name="ios">
+        <icon src="assets/icon.svg" />
+        <!-- iOS 麦克风用途说明：首次请求麦克风时系统弹窗会显示这段文字 -->
+        <config-file target="*-Info.plist" parent="NSMicrophoneUsageDescription">
+            <string>用于英语口语练习的语音输入（语音转文字）</string>
+        </config-file>
+    </platform>
+</widget>
